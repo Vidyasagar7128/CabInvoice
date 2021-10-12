@@ -10,4 +10,11 @@ namespace CabInvoice
         public double kilometer { get; set; }
         public double minute { get; set; }
     }
+
+    class CabAverage
+    {
+        public double count { get; set; }
+        public double total { get; set; }
+        public double average { get; set; }
+    }
 }

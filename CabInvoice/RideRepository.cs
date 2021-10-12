@@ -50,11 +50,37 @@ namespace CabInvoice
                 Console.WriteLine("------------------------------------------------");
             }
         }
+        /// <summary>
+        /// Number of Rides
+        /// Total Fare
+        /// Average Fare per Ride
+        /// </summary>
+        public CabAverage EnhanceInvoice()
+        {
+            double totalFare = 0;
+            int count = rides.Count;
+            foreach(Cab cb in rides)
+            {
+                totalFare += cb.cost;
+            }
+            double average = totalFare / count;
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine($"Total {count} Rides | Total Fare {totalFare} | Average Fare for {count} Rides is {(float) Math.Round(average, 2)}");
+            Console.WriteLine("--------------------------------------------------------------------");
+            CabAverage cabAverage = new CabAverage()
+            {
+                count = count,
+                total = totalFare,
+                average = average
+            };
+            return cabAverage;
+        }
         public void Repeat()
         {
             Console.WriteLine("1.Single Ride");
             Console.WriteLine("2.Multi Rides");
             Console.WriteLine("3.Create Invoice");
+            Console.WriteLine("4.Enhance Invoice");
             Console.WriteLine("0.Exit");
             int num = int.Parse(Console.ReadLine());
             switch (num)
@@ -68,6 +94,10 @@ namespace CabInvoice
                     break;
                 case 3:
                     ShowInvoices();
+                    Repeat();
+                    break;
+                case 4:
+                    EnhanceInvoice();
                     Repeat();
                     break;
                 case 0:
