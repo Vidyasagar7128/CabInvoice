@@ -12,9 +12,23 @@ namespace CabInvoice
             Console.Write("Enter Distance in Kilometer(KM): ");
             double km = double.Parse(Console.ReadLine());
             if (km > 0.5)
-                CabRide(km, 10);
+                CabRide(km, 10,1.0);
             else
-                CabRide(km, 5);
+                CabRide(km, 5,1.0);
+        }
+        public void PremiumRide()
+        {
+            Console.Write("Please Enter Distance in Kilometer(KM): ");
+            double km = double.Parse(Console.ReadLine());
+            CabRide(km,15,2.0);
+            if (km > 1.33)
+            {
+                CabRide(km, 15, 2.0);
+            }
+            else if (km > 0 && km < 1.33)
+                CabRide(km,20,2.0);
+            else
+                CabRide(km, 20, 2.0);
         }
         /// <summary>
         /// Calculate Fare & return it
@@ -22,10 +36,10 @@ namespace CabInvoice
         /// <param name="km"></param>
         /// <param name="kmLowPrice"></param>
         /// <returns></returns>
-        public List<Cab> CabRide(double km, double kmLowPrice)
+        public List<Cab> CabRide(double km, double kmLowPrice,double minutes)
         {
             double kmPrice = km * kmLowPrice;
-            double timePrice = km * 1.0;
+            double timePrice = km * minutes;
             double total = kmPrice + timePrice;
             Cab cab = new Cab()
             {
@@ -83,7 +97,8 @@ namespace CabInvoice
         {
             Console.WriteLine("1.Single Ride");
             Console.WriteLine("2.Multi Rides");
-            Console.WriteLine("3.Create Invoice");
+            Console.WriteLine("3.Prime Ride");
+            Console.WriteLine("4.Create Invoice");
             Console.WriteLine("0.Exit");
             int num = int.Parse(Console.ReadLine());
             switch (num)
@@ -96,6 +111,10 @@ namespace CabInvoice
                     Repeat(id);
                     break;
                 case 3:
+                    PremiumRide();
+                    Repeat(id);
+                    break;
+                case 4:
                     ShowInvoices(id);
                     Repeat(id);
                     break;
