@@ -20,7 +20,6 @@ namespace CabInvoice
         {
             Console.Write("Please Enter Distance in Kilometer(KM): ");
             double km = double.Parse(Console.ReadLine());
-            CabRide(km,15,2.0);
             if (km > 1.33)
             {
                 CabRide(km, 15, 2.0);
